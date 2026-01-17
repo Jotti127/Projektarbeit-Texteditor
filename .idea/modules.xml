@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Projektarbeit Texteditor.iml" filepath="$PROJECT_DIR$/Projektarbeit Texteditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projektarbeit_texteditor.iml" filepath="$PROJECT_DIR$/projektarbeit_texteditor.iml" />
     </modules>
   </component>
 </project>
