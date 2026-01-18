@@ -77,7 +77,7 @@ public class EditorGui extends JFrame{
         dateiNeu.setText("Neu");
         dateiNeu.setActionCommand("neu");
         dateiNeu.setIcon(new ImageIcon("icon/new.png"));
-        //dateiNeu.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
+        dateiNeu.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
         dateiNeu.addActionListener(listener);
         dateiMenu.add(dateiNeu);
 
@@ -86,7 +86,7 @@ public class EditorGui extends JFrame{
         dateiLaden.setText("Laden");
         dateiLaden.setActionCommand("laden");
         dateiLaden.setIcon(new ImageIcon("icon/open.png"));
-        //dateiLaden.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
+        dateiLaden.setAccelerator(KeyStroke.getKeyStroke('L', InputEvent.CTRL_DOWN_MASK));
         dateiLaden.addActionListener(listener);
         dateiMenu.add(dateiLaden);
 
@@ -95,7 +95,7 @@ public class EditorGui extends JFrame{
         dateiSpeichern.setText("Speichern");
         dateiSpeichern.setActionCommand("speichern");
         dateiSpeichern.setIcon(new ImageIcon("icon/save.png"));
-        //dateiSpeichern.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
+        dateiSpeichern.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
         dateiSpeichern.addActionListener(listener);
         dateiMenu.add(dateiSpeichern);
 
@@ -104,7 +104,7 @@ public class EditorGui extends JFrame{
         dateiBeenden.setText("Beenden");
         dateiBeenden.setActionCommand("beenden");
         dateiBeenden.setIcon(new ImageIcon("icon/exit.png"));
-        //dateiBeenden.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
+        dateiBeenden.setAccelerator(KeyStroke.getKeyStroke('Q', InputEvent.CTRL_DOWN_MASK));
         dateiBeenden.addActionListener(listener);
         dateiMenu.add(dateiBeenden);
 
