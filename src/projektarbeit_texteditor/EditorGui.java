@@ -1,13 +1,5 @@
 package projektarbeit_texteditor;
 
-//Kurzübersicht der benötigten Anweisungen
-//add()	fügt eine Komponente hinzu
-//addActionListener()	stellt die Verbindung zwischen einer Komponente und einem ActionListener her
-// getActionCommand()	beschafft ein Action Command
-// getText()	beschafft den Text einer Komponenten
-// setActionCommand()	setzt ein Action Command
-// setText()	setzt den Text einer Komponenten
-
 //importieren Sie die nötigen Klassen
 import javax.swing.*;
 import java.awt.*;
@@ -21,16 +13,18 @@ import java.awt.event.InputEvent;
 
 public class EditorGui extends JFrame{
     //erstellen Sie Instanzvariablen für die Komponenten
-
+    private JTextArea textArea;
 
     //Innere Klasse für ActionListener
     class MyListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //if (e.getActionCommand().equals("neu"))
-                //Methode ergänzen
-            //if (e.getActionCommand().equals("beenden"))
-                //Methode ergänzen
+            if (e.getActionCommand().equals("neu")) {
+                Actions.neu(textArea);
+            }
+            if (e.getActionCommand().equals("beenden")) {
+                Actions.exit();
+            }
         }
     }
 
@@ -41,7 +35,7 @@ public class EditorGui extends JFrame{
         setLayout(new BorderLayout());
 
         // Textbereich erstellen
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setLineWrap(true); //Zeilenumbruch
         textArea.setWrapStyleWord(true); //Zeilenumbruch nur nach Leerzeichen
 
@@ -139,7 +133,7 @@ public class EditorGui extends JFrame{
         bar.add(dateiSpeichernButton);
 
         JButton dateiBeendenButton = new JButton();
-        dateiBeendenButton.setActionCommand("ende");
+        dateiBeendenButton.setActionCommand("beenden");
         dateiBeendenButton.setIcon(new ImageIcon("icon/exit.png"));
         dateiBeendenButton.setToolTipText("Beendet den Editor");
         dateiBeendenButton.addActionListener(listener);
