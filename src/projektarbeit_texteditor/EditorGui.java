@@ -25,6 +25,13 @@ public class EditorGui extends JFrame{
             if (e.getActionCommand().equals("beenden")) {
                 Actions.exit();
             }
+            if (e.getActionCommand().equals("laden")) {
+                Actions.loadDialog(textArea);
+            }
+            if (e.getActionCommand().equals("speichern")) {
+                String saveText = textArea.getText();
+                Actions.saveDialog(saveText);
+            }
         }
     }
 
