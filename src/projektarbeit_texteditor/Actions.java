@@ -2,6 +2,7 @@ package projektarbeit_texteditor;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.File;
 
 public class Actions {
@@ -49,5 +50,17 @@ public class Actions {
             String fileContent = FileManagement.load(file);
             textArea.setText(fileContent);
         }
+    }
+
+    public static void increaseFontSize(JTextArea textArea) {
+        Font currentFont = textArea.getFont();
+        Font font = new Font(currentFont.getName(), currentFont.getStyle(), currentFont.getSize() + 2);
+        textArea.setFont(font);
+    }
+
+    public static void decreaseFontSize(JTextArea textArea) {
+        Font currentFont = textArea.getFont();
+        Font font = new Font(currentFont.getName(), currentFont.getStyle(), currentFont.getSize() - 2);
+        textArea.setFont(font);
     }
 }

@@ -32,6 +32,12 @@ public class EditorGui extends JFrame{
                 String saveText = textArea.getText();
                 Actions.saveDialog(saveText);
             }
+            if (e.getActionCommand().equals("increase")) {
+                Actions.increaseFontSize(textArea);
+            }
+            if (e.getActionCommand().equals("decrease")) {
+                Actions.decreaseFontSize(textArea);
+            }
         }
     }
 
@@ -69,9 +75,10 @@ public class EditorGui extends JFrame{
     //Menüleiste
     private void menu() {
         JMenuBar menu = new JMenuBar();
-        JMenu dateiMenu = new JMenu("Datei");
-
         MyListener listener = new MyListener();
+
+        //Menü -> Datei Reiter
+        JMenu dateiMenu = new JMenu("Datei");
 
         //Menü-Item Neu
         JMenuItem dateiNeu = new JMenuItem();
@@ -109,7 +116,31 @@ public class EditorGui extends JFrame{
         dateiBeenden.addActionListener(listener);
         dateiMenu.add(dateiBeenden);
 
+
+        //Menü -> Bearbeiten Reiter
+        JMenu editMenu = new JMenu("Bearbeiten");
+
+        //Menü-Item Schrift vergrößern
+        JMenuItem increaseFont = new JMenuItem();
+        increaseFont.setText("Schrift vergrößern");
+        increaseFont.setActionCommand("increase");
+        increaseFont.setIcon(new ImageIcon("icon/increaseFont.png"));
+        increaseFont.setAccelerator(KeyStroke.getKeyStroke('G', InputEvent.CTRL_DOWN_MASK));
+        increaseFont.addActionListener(listener);
+        editMenu.add(increaseFont);
+
+        //Menü-Item Schrift verkleinern
+        JMenuItem decreaseFont = new JMenuItem();
+        decreaseFont.setText("Schrift verkleinern");
+        decreaseFont.setActionCommand("decrease");
+        decreaseFont.setIcon(new ImageIcon("icon/decreaseFont.png"));
+        decreaseFont.setAccelerator(KeyStroke.getKeyStroke('K', InputEvent.CTRL_DOWN_MASK));
+        decreaseFont.addActionListener(listener);
+        editMenu.add(decreaseFont);
+
+        //Hinzufügen der Menü-Reiter
         menu.add(dateiMenu);
+        menu.add(editMenu);
         this.setJMenuBar(menu);
     }
 
@@ -138,6 +169,20 @@ public class EditorGui extends JFrame{
         dateiSpeichernButton.setToolTipText("Speichert das Dokument");
         dateiSpeichernButton.addActionListener(listener);
         bar.add(dateiSpeichernButton);
+
+        JButton increaseFontButton = new JButton();
+        increaseFontButton.setActionCommand("increase");
+        increaseFontButton.setIcon(new ImageIcon("icon/increaseFont.png"));
+        increaseFontButton.setToolTipText("Schrift vergrößern");
+        increaseFontButton.addActionListener(listener);
+        bar.add(increaseFontButton);
+
+        JButton decreaseFontButton = new JButton();
+        decreaseFontButton.setActionCommand("decrease");
+        decreaseFontButton.setIcon(new ImageIcon("icon/decreaseFont.png"));
+        decreaseFontButton.setToolTipText("Schrift verkleinern");
+        decreaseFontButton.addActionListener(listener);
+        bar.add(decreaseFontButton);
 
         JButton dateiBeendenButton = new JButton();
         dateiBeendenButton.setActionCommand("beenden");
