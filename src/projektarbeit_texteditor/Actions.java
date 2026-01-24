@@ -63,4 +63,16 @@ public class Actions {
         Font font = new Font(currentFont.getName(), currentFont.getStyle(), currentFont.getSize() - 2);
         textArea.setFont(font);
     }
+
+    public static int countWords (JTextArea textArea){
+        String text = textArea.getText();
+
+        if (text.isEmpty())
+            return 0;
+
+        else {
+            String[] words = text.trim().split("\\s+");
+            return words.length;
+        }
+    }
 }

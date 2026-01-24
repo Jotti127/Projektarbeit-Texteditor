@@ -2,6 +2,8 @@ package projektarbeit_texteditor;
 
 //importieren Sie die nötigen Klassen
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ import java.awt.event.InputEvent;
 public class EditorGui extends JFrame{
     //erstellen Sie Instanzvariablen für die Komponenten
     private JTextArea textArea;
+    private JLabel wordCountLabel;
 
     //Innere Klasse für ActionListener
     class MyListener implements ActionListener {
@@ -59,6 +62,7 @@ public class EditorGui extends JFrame{
         //erzeugen Sie die Komponenten
         //setzen Sie die ActionCommands für die Komponenten
         menu();
+        statusMenu();
         add(symbolleiste(), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -192,5 +196,39 @@ public class EditorGui extends JFrame{
         bar.add(dateiBeendenButton);
 
         return (bar);
+    }
+
+
+    //Status-Menüleiste für Wortzähler
+    private void statusMenu() {
+        JPanel status = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        wordCountLabel = new JLabel("Wörter: 0");
+        status.add(wordCountLabel);
+
+        add(status, BorderLayout.SOUTH);
+
+        textArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateWordCount();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateWordCount();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateWordCount();
+            }
+        });
+    }
+
+    //Methode zum Aktualisieren Wortzähler
+    private void updateWordCount() {
+        int count = Actions.countWords(textArea);
+        wordCountLabel.setText("Wörter: " + count);
     }
 }
