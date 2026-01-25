@@ -2,6 +2,9 @@ package projektarbeit_texteditor;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import java.awt.*;
 import java.io.File;
 
@@ -63,6 +66,47 @@ public class Actions {
         Font font = new Font(currentFont.getName(), currentFont.getStyle(), currentFont.getSize() - 2);
         textArea.setFont(font);
     }
+
+    public static void find(JTextArea textArea) {
+        String text = textArea.getText().toLowerCase();
+        String userInput = JOptionPane.showInputDialog("Suche nach:");
+        if (userInput == null || userInput.isBlank()) return;
+
+        Highlighter highlighter = textArea.getHighlighter();
+        highlighter.removeAllHighlights();
+
+        int start = 0;
+        boolean found = false;
+
+        while (true) {
+            int match = text.indexOf(userInput.toLowerCase(), start);
+            if (match == -1) {
+                if (found) {
+                    JOptionPane.showMessageDialog(null, "Keine weiteren Teffer für:\n" + userInput);
+                    break;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Keine Teffer für:\n" + userInput);
+                    break;
+                }
+            }
+            try {
+                highlighter.addHighlight(match, match + userInput.length(),
+                        new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW));
+                textArea.setCaretPosition(match);
+                found = true;
+                int result = JOptionPane.showConfirmDialog(null, "Wollen Sie weitersuchen?",
+                        "Weitersuchen?", JOptionPane.YES_NO_OPTION);
+
+                if (result != JOptionPane.YES_OPTION) break;
+
+                start = match + userInput.length();
+            } catch (BadLocationException e) {
+                System.out.println("Fehler BadLocationException " + e);
+            }
+        }
+    }
+
 
     public static int countWords (JTextArea textArea){
         String text = textArea.getText();

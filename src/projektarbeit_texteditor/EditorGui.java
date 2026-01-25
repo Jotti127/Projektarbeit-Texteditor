@@ -41,11 +41,14 @@ public class EditorGui extends JFrame{
             if (e.getActionCommand().equals("decrease")) {
                 Actions.decreaseFontSize(textArea);
             }
+            if (e.getActionCommand().equals("find")) {
+                Actions.find(textArea);
+            }
         }
     }
 
-    public EditorGui(String fenstertitel) {
-        super(fenstertitel);
+    public EditorGui(String windowTitle) {
+        super(windowTitle);
 
         // Layout für das Fenster
         setLayout(new BorderLayout());
@@ -142,6 +145,15 @@ public class EditorGui extends JFrame{
         decreaseFont.addActionListener(listener);
         editMenu.add(decreaseFont);
 
+        //Menü-Item Suche
+        JMenuItem findItem = new JMenuItem();
+        findItem.setText("Suche");
+        findItem.setActionCommand("find");
+        findItem.setIcon(new ImageIcon("icon/find.png"));
+        findItem.setAccelerator(KeyStroke.getKeyStroke('F', InputEvent.CTRL_DOWN_MASK));
+        findItem.addActionListener(listener);
+        editMenu.add(findItem);
+
         //Hinzufügen der Menü-Reiter
         menu.add(dateiMenu);
         menu.add(editMenu);
@@ -187,6 +199,13 @@ public class EditorGui extends JFrame{
         decreaseFontButton.setToolTipText("Schrift verkleinern");
         decreaseFontButton.addActionListener(listener);
         bar.add(decreaseFontButton);
+
+        JButton findButton = new JButton();
+        findButton.setActionCommand("find");
+        findButton.setIcon(new ImageIcon("icon/find.png"));
+        findButton.setToolTipText("Suche");
+        findButton.addActionListener(listener);
+        bar.add(findButton);
 
         JButton dateiBeendenButton = new JButton();
         dateiBeendenButton.setActionCommand("beenden");
