@@ -1,9 +1,13 @@
 package projektarbeit_texteditor;
 
+//Importierte Klassen
 import javax.swing.*;
 import java.io.*;
 
+//FileManagement nur für Datei-Handling
 public class FileManagement {
+
+    //Datei-Handling speichern
     public static void save(File file, String saveText) {
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(saveText);
@@ -15,6 +19,7 @@ public class FileManagement {
         }
     }
 
+    //Datei-Handling laden
     public static String load(File file) {
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader((new FileReader(file)))) {

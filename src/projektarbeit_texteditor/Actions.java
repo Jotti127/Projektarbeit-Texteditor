@@ -1,5 +1,6 @@
 package projektarbeit_texteditor;
 
+//Importierte Klassen
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
@@ -8,8 +9,11 @@ import javax.swing.text.Highlighter;
 import java.awt.*;
 import java.io.File;
 
+//Actions für Steuerung der Aktionen
 public class Actions {
-    public static void neu(JTextArea textArea) {
+
+    //Aktion Neue Datei
+    public static void newFile(JTextArea textArea) {
         int result = JOptionPane.showConfirmDialog(null,
                 "Wollen Sie wirklich ein neues Dokument erstellen?",
                 "Neues Dokument?",
@@ -18,10 +22,14 @@ public class Actions {
             textArea.setText("");
         }
     }
+
+    //Aktion Beenden
     public static void exit() {
         System.exit(0);
     }
-    public static void saveDialog(String saveText) {
+
+    //Aktion Speichern
+    public static File saveDialog(String saveText) {
         JFileChooser fileChooser = new JFileChooser();
 
         FileNameExtensionFilter filenameFilter = new FileNameExtensionFilter("Textdateien (*.txt)", "txt");
@@ -35,9 +43,13 @@ public class Actions {
                 file = new File(file.getAbsolutePath() + ".txt");
             }
             FileManagement.save(file, saveText);
+            return file;
         }
+        else return null;
     }
-    public static void loadDialog(JTextArea textArea) {
+
+    //Aktion Laden
+    public static File loadDialog(JTextArea textArea) {
         JFileChooser fileChooser = new JFileChooser();
 
         FileNameExtensionFilter filenameFilter = new FileNameExtensionFilter("Textdateien (*.txt)", "txt");
@@ -52,21 +64,26 @@ public class Actions {
             }
             String fileContent = FileManagement.load(file);
             textArea.setText(fileContent);
+            return file;
         }
+        else return null;
     }
 
+    //Aktion Schrift vergrößern
     public static void increaseFontSize(JTextArea textArea) {
         Font currentFont = textArea.getFont();
         Font font = new Font(currentFont.getName(), currentFont.getStyle(), currentFont.getSize() + 2);
         textArea.setFont(font);
     }
 
+    //Aktion Schrift verkleinern
     public static void decreaseFontSize(JTextArea textArea) {
         Font currentFont = textArea.getFont();
         Font font = new Font(currentFont.getName(), currentFont.getStyle(), currentFont.getSize() - 2);
         textArea.setFont(font);
     }
 
+    //Aktion Suchen
     public static void find(JTextArea textArea) {
         String text = textArea.getText().toLowerCase();
         String userInput = JOptionPane.showInputDialog("Suche nach:");
@@ -107,7 +124,7 @@ public class Actions {
         }
     }
 
-
+    //Aktion Wörter zählen
     public static int countWords (JTextArea textArea){
         String text = textArea.getText();
 
