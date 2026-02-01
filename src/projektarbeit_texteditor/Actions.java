@@ -18,7 +18,7 @@ public class Actions {
                 "Wollen Sie wirklich ein neues Dokument erstellen?",
                 "Neues Dokument?",
                 JOptionPane.YES_NO_OPTION);
-        if (result == 0) {
+        if (result == JOptionPane.YES_OPTION) {
             textArea.setText("");
         }
     }
@@ -119,7 +119,7 @@ public class Actions {
 
                 start = match + userInput.length();
             } catch (BadLocationException e) {
-                System.out.println("Fehler BadLocationException " + e);
+                JOptionPane.showMessageDialog(null, "Fehler BadLocationException: \n" + e.getMessage());
             }
         }
     }
